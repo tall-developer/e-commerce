@@ -1,102 +1,230 @@
-// Import necessary libraries
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gap/gap.dart';
 
-// Define the home page widget
-class HomePage extends StatelessWidget {
-  // Define the app name and menu icon images
+class HomePage extends StatefulWidget {
   final String appName = 'DISCOVER';
   final Image menuIcon = Image.asset('assets/images/menu_icon.png');
   final Image searchIcon = Image.asset('assets/images/search_icon.png');
+  final List<String> buttonLabels = [
+    'New Release',
+    'Men',
+    'Women',
+    'Kids',
+    'Sports',
+    'Home',
+    'Beauty',
+    'Toys'
+  ];
+  final List<Map<String, String>> products = [
+    {
+      'name': 'Product 1',
+      'description': 'Description for Product 1',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 2',
+      'description': 'Description for Product 2',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 3',
+      'description': 'Description for Product 3',
+      'image': 'assets/images/sneaker-1.png'
+    },
+        {
+      'name': 'Product 1',
+      'description': 'Description for Product 1',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 2',
+      'description': 'Description for Product 2',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 3',
+      'description': 'Description for Product 3',
+      'image': 'assets/images/sneaker-1.png'
+    },
+        {
+      'name': 'Product 1',
+      'description': 'Description for Product 1',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 2',
+      'description': 'Description for Product 2',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 3',
+      'description': 'Description for Product 3',
+      'image': 'assets/images/sneaker-1.png'
+    },
+        {
+      'name': 'Product 1',
+      'description': 'Description for Product 1',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 2',
+      'description': 'Description for Product 2',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    {
+      'name': 'Product 3',
+      'description': 'Description for Product 3',
+      'image': 'assets/images/sneaker-1.png'
+    },
+    // Add more products as needed
+  ];
 
-  // Define button labels
-  final List<String> buttonLabels = ['New Release', 'Men', 'Women', 'Kids', 'Sports', 'Home', 'Beauty', 'Technology'];
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-  // Build the home page
+class _HomePageState extends State<HomePage> {
+  int selectedButtonIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Create a horizontal layout for the app name and menu icon
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              appName,
-              style: GoogleFonts.rubik( // Use your 'Freeman-Regular' font
+              widget.appName,
+              style: GoogleFonts.aBeeZee(
                 fontSize: 30,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              // Add SizedBox to control the size of the menuIcon
-              height: 30,
+            SizedBox(
               width: 30,
+              child: IconButton(
+                icon: ImageIcon(widget.menuIcon.image),
+                onPressed: () {
+                  // Handle menu click
+                },
+                iconSize: 40, // Increase the icon size
+              ),
             ),
           ],
         ),
       ),
       body: Column(
         children: [
-          // Create a clickable search bar with the search icon
-          GestureDetector(
-            onTap: () {
-              // Handle search bar click
-            },
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 1.0,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Search'),
-                  SizedBox(
-                    height: 24,
-                    width: 24,
-                    child: searchIcon,
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: 0.9, // Adjust the width factor to control the width of the search bar
+              child: Container(
+                height: 40, // Decreased height
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1.0,
                   ),
-                ],
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: const InputDecoration(
+                          hintText: 'Search',
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(bottom: 10), // Adjust this to align the text properly
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: widget.searchIcon,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-
-          // Add scrollable buttons
-          Container(
-            height: 50, // Adjust height as needed
+          const SizedBox(
+            height: 20,
+          ),
+          SizedBox(
+            height: 50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: buttonLabels.length,
+              itemCount: widget.buttonLabels.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TextButton(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ElevatedButton(
                     onPressed: () {
-                      // Handle button click for each label
+                      setState(() {
+                        selectedButtonIndex = index;
+                      });
+                      _navigateToPage(context, widget.buttonLabels[index]);
                     },
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black, backgroundColor: Colors.white, // Background color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    style: ButtonStyle(
+                      foregroundColor: WidgetStateProperty.resolveWith<Color>(
+                        (Set<WidgetState> states) {
+                          return selectedButtonIndex == index
+                              ? Colors.white
+                              : Colors.black;
+                        },
+                      ),
+                      backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                        (Set<WidgetState> states) {
+                          return selectedButtonIndex == index
+                              ? Colors.black
+                              : Colors.white;
+                        },
+                      ),
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
                       ),
                     ),
-                    child: Text(buttonLabels[index]),
+                    child: Text(widget.buttonLabels[index]),
                   ),
                 );
               },
             ),
           ),
-
-          // Rest of your content
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.products.length,
+              itemBuilder: (context, index) {
+                final product = widget.products[index];
+                return Card(
+                  margin: const EdgeInsets.all(10),
+                  child: ListTile(
+                    leading: Image.asset(
+                      product['image']!,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(product['name']!),
+                    subtitle: Text(product['description']!),
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  void _navigateToPage(BuildContext context, String category) {
+    String routeName = '/$category';
+    Navigator.pushNamed(context, routeName);
   }
 }

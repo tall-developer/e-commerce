@@ -1,5 +1,4 @@
 // Import necessary libraries
-// Import necessary libraries
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gap/gap.dart';
@@ -10,6 +9,9 @@ class HomePage extends StatelessWidget {
   final String appName = 'DISCOVER';
   final Image menuIcon = Image.asset('assets/images/menu_icon.png');
   final Image searchIcon = Image.asset('assets/images/search_icon.png');
+
+  // Define button labels
+  final List<String> buttonLabels = ['New Release', 'Men', 'Women', 'Kids', 'Sports', 'Home', 'Beauty', 'Technology'];
 
   // Build the home page
   @override
@@ -22,17 +24,15 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               appName,
-
-              style: GoogleFonts.aBeeZee( // Use your 'Freeman-Regular' font
+              style: GoogleFonts.rubik( // Use your 'Freeman-Regular' font
                 fontSize: 30,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w900,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               // Add SizedBox to control the size of the menuIcon
-              height: 30, // Set the desired height
-              width: 30, // Set the desired width
-              child: menuIcon,
+              height: 30,
+              width: 30,
             ),
           ],
         ),
@@ -44,36 +44,57 @@ class HomePage extends StatelessWidget {
             onTap: () {
               // Handle search bar click
             },
-            child: SizedBox(
-              height: 50, // Set the desired height of the search bar
-              width: 300,  // Set the desired width of the search bar
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.grey
-,
-                    width: 1.0,
-                  ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1.0,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-      children: [
-        Text('Search'),
-
-        SizedBox(
-          height: 24,
-          width: 24,
-          child: searchIcon,
-        ),
-      ],
-    ),
-  ),
-),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Search'),
+                  SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: searchIcon,
+                  ),
+                ],
+              ),
+            ),
           ),
+
+          // Add scrollable buttons
+          Container(
+            height: 50, // Adjust height as needed
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: buttonLabels.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: TextButton(
+                    onPressed: () {
+                      // Handle button click for each label
+                    },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black, backgroundColor: Colors.white, // Background color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Text(buttonLabels[index]),
+                  ),
+                );
+              },
+            ),
+          ),
+
+          // Rest of your content
         ],
       ),
     );

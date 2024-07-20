@@ -118,9 +118,9 @@ class _HomePageState extends State<HomePage> {
         children: [
           Center(
             child: FractionallySizedBox(
-              widthFactor: 0.9, // Adjust the width factor to control the width of the search bar
+              widthFactor: 0.9, // width factor to control the width of the search bar
               child: Container(
-                height: 40, // Decreased height
+                height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: const InputDecoration(
                           hintText: 'Search',
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(bottom: 10), // Adjust this to align the text properly
+                          contentPadding: EdgeInsets.only(bottom: 10), // contentPadding to align the text properly
                         ),
                       ),
                     ),
